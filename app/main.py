@@ -18,4 +18,4 @@ async def lifespan(app: FastAPI):
 
 
 app.include_router(news_router, prefix="/api/news")
-app.include_router(page_router, prefix="/news")
+app.include_router(page_router)
