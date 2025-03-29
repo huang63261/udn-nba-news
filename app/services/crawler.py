@@ -22,13 +22,15 @@ def fetch_feature_news() -> List[Dict]:
 
     feature_news = soup.find("ul", class_="splide__list")
     if not feature_news:
-        logger.warning("無法找到焦點新聞區塊")
+        logger.warning("Cannot Find Featured News Section")
         return []
 
     for a_tag in feature_news.find_all("a"):
         h1_tag = a_tag.find("h1")
         title = h1_tag.text.strip() if h1_tag else "No Title"
         href = a_tag.get("href")
+        img_tag = a_tag.select_one("picture img")
+        image_url = img_tag["src"] if img_tag else None
 
         if not href or not href.startswith("https"):
             href = "https://tw-nba.udn.com" + href
@@ -44,10 +46,11 @@ def fetch_feature_news() -> List[Dict]:
             )
 
             content_parts = []
-            for tag in contents_dom.find_all(["p", "figure"]):
+            for tag in contents_dom.find_all("p"):
                 if (
                     tag.find("div", class_="embedded-content")
                     or tag.get("dir") == "ltr"
+                    or tag.find("figure")
                 ):
                     continue
 
@@ -62,10 +65,11 @@ def fetch_feature_news() -> List[Dict]:
                     "title": title,
                     "url": href,
                     "content": full_content,
+                    "image_url": image_url,
                 }
             )
 
         except Exception as e:
-            logger.warning(f"錯誤處理新聞連結 {href}：{e}")
+            logger.warning(f"Error Handle News Link {href}: {e}")
 
     return feature_news_list
