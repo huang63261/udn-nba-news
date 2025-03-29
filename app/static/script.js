@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       data.forEach((news) => {
         const item = document.createElement("div");
-        item.innerHTML = `<p><a href="/news/${news.id}">${news.title}</a></p>`;
+        item.innerHTML = `<p><a href="/${news.id}">${news.title}</a></p>`;
         container.appendChild(item);
       });
     })
