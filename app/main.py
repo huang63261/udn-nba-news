@@ -1,9 +1,9 @@
+from app.database import create_db_and_tables
+from app.routers.news import router as news_router
+from app.routers.page import router as page_router
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from database import create_db_and_tables
-from routers.news import router as news_router
-from routers.page import router as page_router
 
 
 app = FastAPI()

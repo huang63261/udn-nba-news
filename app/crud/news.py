@@ -1,6 +1,6 @@
+from app.models import News
 from typing import List
 from sqlmodel import Session, select
-from models import News
 
 
 def create_news(session: Session, news: News) -> News:
