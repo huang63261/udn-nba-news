@@ -1,9 +1,9 @@
-from crud import news as news_crud
+from app.crud import news as news_crud
+from app.dependency import get_session
+from app.services.crawler import fetch_feature_news
+from app.models import News
 from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session, select
-from dependency import get_session
-from models import News
-from services.crawler import fetch_feature_news
 
 router = APIRouter()
 
