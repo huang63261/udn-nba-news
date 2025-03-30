@@ -1,22 +1,10 @@
 # 🏀 UDN NBA Featured News Crawler
 
-一個使用 **FastAPI** 開發的全端小專案，具備爬蟲、資料庫、API、前端畫面與雲端部署功能。
+一個使用 **FastAPI** 開發的小專案，具備爬蟲、資料庫、API、簡易前端畫面。
 
 🔗 Demo 網址：[https://udn-nba-news.onrender.com/](https://udn-nba-news.onrender.com/)
 
 📦 GitHub Repo：[https://github.com/huang63261/udn-nba-news](https://github.com/huang63261/udn-nba-news)
-
----
-
-## 🔧 功能介紹
-
-- ✅ 爬取 UDN NBA 焦點新聞（焦點區塊）
-- ✅ 使用 SQLModel 儲存於 SQLite
-- ✅ 提供 RESTful API：新聞列表與詳情
-- ✅ 使用 AJAX 呈現在前端畫面
-- ✅ 提供「一鍵刷新最新新聞」按鈕
-- ✅ 使用 Alembic 管理資料庫 schema
-- ✅ Render 自動部署，自動執行 migration
 
 ---
 
@@ -84,19 +72,6 @@ uvicorn app.main:app --reload
 
 ---
 
-## 🌐 Render 部署
-
-- 自動執行 Alembic migration
-  
-```python
-# main.py - lifespan()
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    run_alembic_upgrade()
-    yield
-```
-
----
 
 ## 📮 API 路由
 
@@ -105,11 +80,3 @@ async def lifespan(app: FastAPI):
 | GET  | `/api/news` | 取得所有新聞 |
 | GET  | `/api/news/{id}` | 取得單篇新聞 |
 | GET  | `/api/news/crawl-news/` | 立即爬取新聞並儲存（AJAX 按鈕使用） |
-
----
-
-## 🙌 作者
-
-By Harvey Huang ｜ [GitHub](https://github.com/huang63261)
-
-> 本專案為後端工程師應徵用小作品，展示 FastAPI + Crawler + Deployment 技術整合能力。
