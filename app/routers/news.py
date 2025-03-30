@@ -20,6 +20,8 @@ def crawl_and_save_news(session: Session = Depends(get_session)):
 
     news_crud.create_news_batch(session, news_models)
 
+    return {"inserted": len(news_models)}
+
 
 @router.get("/")
 def get_all_news(session: Session = Depends(get_session)):
@@ -40,7 +42,7 @@ def get_news(id: int, session: Session = Depends(get_session)):
 @router.post("/", response_model=News)
 def create_news(news: News, session: Session = Depends(get_session)):
     statement = select(News).where(News.url == news.url)
-    existing = session.exec(statement)
+    existing = session.exec(statement).first()
     if existing:
         raise HTTPException(status_code=400, detail="News with this URL already exists")
 
